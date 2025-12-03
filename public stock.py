@@ -13,6 +13,17 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 df_schedule = conn.read(worksheet="일정", ttl="5m")
 df_trade = conn.read(worksheet="매매", ttl="5m")
 
+# 2️⃣ 날짜/숫자 타입 변환
+df_schedule["청약일"] = pd.to_datetime(df_schedule["청약일"], errors="coerce")
+df_schedule["상장일"] = pd.to_datetime(df_schedule["상장일"], errors="coerce")
+df_schedule["공모가"] = pd.to_numeric(df_schedule["공모가"], errors="coerce")
+df_schedule["최소증거금"] = pd.to_numeric(df_schedule["최소증거금"], errors="coerce")
+df_schedule["균등"] = pd.to_numeric(df_schedule["균등"], errors="coerce")
+df_schedule["비례"] = pd.to_numeric(df_schedule["비례"], errors="coerce")
+
+df_trade["매도일"] = pd.to_datetime(df_trade["매도일"], errors="coerce")
+df_trade["실제이익"] = pd.to_numeric(df_trade["실제이익"], errors="coerce")
+
 # 세션 상태 초기화
 if "calendar_year" not in st.session_state:
     st.session_state.calendar_year = pd.Timestamp.today().year
