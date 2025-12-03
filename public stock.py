@@ -295,27 +295,3 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# ----------------------------
-# 6) 수익 합계 출력
-# ----------------------------
-
-# 매매 시트 불러오기
-df_trade = pd.read_excel("C:/Users/woori/Desktop/Invest/공모주 관리.xlsx", sheet_name="매매")
-
-# 전체 실제이익 합계
-total_profit = df_trade["실제이익"].sum()
-
-# 이번년도 실제이익 합계
-current_year = datetime.datetime.today().year
-df_trade["매도일"] = pd.to_datetime(df_trade["매도일"], errors="coerce")
-df_trade_current_year = df_trade[df_trade["매도일"].dt.year == current_year]
-year_profit = df_trade_current_year["실제이익"].sum()
-
-summary_html = f"""
-<div style=' padding:12px 16px; margin-top:12px; background:#f5f5f5; border-radius:12px; font-weight:500; font-size:16px; '>
-    # {current_year}년 공모주 수익: {year_profit:,.0f} 원
-</div>
-"""
-
-st.markdown(summary_html, unsafe_allow_html=True)
