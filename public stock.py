@@ -215,8 +215,15 @@ kr_holidays = holidays.KR(years=[selected_year])
 data_map = {}
 for _, row in df_schedule.iterrows():
     종목명 = str(row["종목명"])
-    증권사 = str(row["증권사"])
-    종목표시 = f"{종목명} <span style='color:#999; font-size:12px;'>({증권사})</span>"
+    증권사 = str(row["증권사"])    
+    테마 = str(row["테마"])
+    
+    # 테마가 "스팩"이면 증권사 표기하지 않음
+    if 테마 == "스팩":
+        종목표시 = f"{종목명}"
+    else:
+        종목표시 = f"{종목명} <span style='color:#999; font-size:12px;'>({증권사})</span>"
+
     if pd.notna(row["청약일"]) and row["청약일"].year == selected_year and row["청약일"].month == selected_month:
         day = row["청약일"].day
         data_map.setdefault(day, []).append(("청약", 종목표시))
