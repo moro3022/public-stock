@@ -109,8 +109,8 @@ if not df_this_week.empty:
         border_color = "#6A5ACD" if is_today_청약 else "#f4ca16" if is_today_상장 else "#ddd"
         border_width = "2px" if is_today_청약 or is_today_상장 else "1px"
 
-        예측색 = {"매우좋음": "#EAA600", "좋음": "#F8CEB9", "보통": "#D6C6B4"}.get(예측값, "#EEE")
-        예측글자색 = {"매우좋음": "#fff", "좋음": "#6B3F1D", "보통": "#5A4632"}.get(예측값, "#666")
+        예측색 = {"매우좋음": "#FF8A65", "좋음": "#FF9E9E", "보통": "#FDB737", "안좋음":"#b8b8d1"}.get(예측값, "#EEE")
+        예측글자색 = {"매우좋음": "#fff", "좋음": "#fff", "보통": "#fff", "안좋음": "#fff"}.get(예측값, "#666")
 
         예측뱃지 = f"<span style='background:{예측색};color:{예측글자색};padding:2px 8px;border-radius:4px;font-size:12px;font-weight:500;'>{예측값}</span>"
         
